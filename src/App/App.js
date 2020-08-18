@@ -37,7 +37,7 @@ class App extends React.Component {
       if (authed) {
         return <BoardContainer />;
       }
-      return <Auth />;
+      return '';
     };
 
     return (
