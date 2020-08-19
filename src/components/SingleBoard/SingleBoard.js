@@ -34,10 +34,11 @@ class SingleBoard extends React.Component {
     const { board, pins } = this.state;
 
     const pinCard = pins.map((pin) => <Pins key={pin.id} pin={pin} />);
+
     return (
     <div>
       <h4>{board.name}</h4>
-      <button className="btn btn-secondary" onClick={() => setSingleBoard('')}>Back To Boards</button>
+      <button className="btn btn-secondary" onClick={() => setSingleBoard('')}>Back To Boards <i className="ml-2 fas fa-undo"></i></button>
       <div className="card-columns">
         {pinCard}
       </div>

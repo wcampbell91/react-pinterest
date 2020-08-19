@@ -18,14 +18,11 @@ class Board extends React.Component {
   render() {
     const { board } = this.props;
     return (
-      <div className="card text-center">
-        <div className="card-header">
-          Featured
-        </div>
+      <div className="card text-center mt-4">
         <div className="card-body">
           <h5 className="card-title">{board.name}</h5>
           <p className="card-text">{board.description}</p>
-          <button className="btn btn-primary" onClick={this.singleBoardEvent}>View Board Details</button>
+          <button className="btn btn-primary" onClick={this.singleBoardEvent}>View Board Details <i className="ml-2 fas fa-search-plus"></i></button>
         </div>
       </div>
     );

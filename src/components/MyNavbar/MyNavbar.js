@@ -21,10 +21,10 @@ class MyNavbar extends React.Component {
     return (
       <div>
         <nav className="navbar navbar-light bg-danger">
-          <a className="navbar-brand" href="#App">Pinterest</a>
+          <a className="navbar-brand" href="#App"><i className="fab fa-pinterest-square mr-2"></i>Pinterest</a>
           {
             authed
-              ? <button className="btn btn-secondary" onClick={this.logoutClickEvent}>Logout</button>
+              ? <button className="btn btn-secondary" onClick={this.logoutClickEvent}>Logout <i className=" ml-2 fas fa-sign-out-alt"></i></button>
               : <Auth />
           }
         </nav>
