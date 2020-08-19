@@ -1,0 +1,17 @@
+{
+  "board1": {
+    "name": "Kitchen",
+    "description": "All of your kitchen possibilities!",
+    "uid": "FzduyhB2ClYKtVfe5zooWZ5kq062"
+  },
+  "board2": {
+    "name": "Outdoors",
+    "description": "Outdoors life is the right life",
+    "uid":"FzduyhB2ClYKtVfe5zooWZ5kq062"
+  },
+  "board3": {
+    "name": "Bedroom",
+    "description": "Everything you need to get some good shut-eye",
+    "uid": "FzduyhB2ClYKtVfe5zooWZ5kq062"
+  }
+}
