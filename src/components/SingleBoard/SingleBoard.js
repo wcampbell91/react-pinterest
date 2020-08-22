@@ -25,13 +25,16 @@ class SingleBoard extends React.Component {
       .catch((err) => console.error('get pins broke!', err));
   };
 
-  componentDidMount() {
+  getBoard = () => {
     const { boardId } = this.props;
 
     boardData.getSingleBoardById(boardId)
       .then((response) => this.setState({ board: response.data }))
       .catch((err) => console.error('get single board failed!', err));
+  }
 
+  componentDidMount() {
+    this.getBoard();
     this.getPins();
   }
 
