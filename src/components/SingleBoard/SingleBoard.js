@@ -17,6 +17,14 @@ class SingleBoard extends React.Component {
     board: {},
   }
 
+  getPins = () => {
+    const { boardId } = this.props;
+
+    pinData.getPinsbyBoardId(boardId)
+      .then((response) => this.setState({ pins: response }))
+      .catch((err) => console.error('get pins broke!', err));
+  };
+
   componentDidMount() {
     const { boardId } = this.props;
 
@@ -24,16 +32,22 @@ class SingleBoard extends React.Component {
       .then((response) => this.setState({ board: response.data }))
       .catch((err) => console.error('get single board failed!', err));
 
-    pinData.getPinsbyBoardId(boardId)
-      .then((response) => this.setState({ pins: response }))
-      .catch((err) => console.error('get pins broke!', err));
+    this.getPins();
   }
+
+  deletePin = (pinId) => {
+    pinData.deletePin(pinId)
+      .then(() => {
+        this.getPins();
+      })
+      .catch((err) => console.error(err));
+  };
 
   render() {
     const { setSingleBoard } = this.props;
     const { board, pins } = this.state;
 
-    const pinCard = pins.map((pin) => <Pins key={pin.id} pin={pin} />);
+    const pinCard = pins.map((pin) => <Pins key={pin.id} pin={pin} deletePin={this.deletePin} />);
 
     return (
     <div>
