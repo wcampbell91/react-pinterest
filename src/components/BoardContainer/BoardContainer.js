@@ -12,6 +12,7 @@ import smash from '../../helpers/data/smash';
 // BoardForm Component
 // Show BoardForm onClick of some button in here
 // need a button in BoardContainer
+// finish out form and figure out inputs
 // on submit of form: save to firebase, make sure board shows up
 
 class BoardContainer extends React.Component {
