@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import authData from '../../helpers/data/AuthData';
 
@@ -8,6 +9,10 @@ import authData from '../../helpers/data/AuthData';
 // uid (currentUser)
 
 class BoardForm extends React.Component {
+  static propTypes = {
+    createBoard: PropTypes.func.isRequired,
+  }
+
   state ={
     name: '',
     description: '',
@@ -26,6 +31,8 @@ class BoardForm extends React.Component {
   saveBoardEvent = (e) => {
     e.preventDefault();
     const { name, description } = this.state;
+    const { createBoard } = this.props;
+
     const newBoard = {
       // can use shorthand because keys and state are the same
       name,
@@ -33,7 +40,7 @@ class BoardForm extends React.Component {
       uid: authData.getUid(),
     };
 
-    console.error('here is a new board', newBoard);
+    createBoard(newBoard);
   };
 
   render() {
