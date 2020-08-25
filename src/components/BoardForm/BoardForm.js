@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 
 import authData from '../../helpers/data/AuthData';
 
-// new board requires:
-// description
-// name
-// uid (currentUser)
+// user BoardForm for updating
+// add some kind of edit button to boards
+// on click, open up BoardForm with inputs populated w/ info
+// on save/submit the board should update
+// and re-render the BoardContainer
 
 class BoardForm extends React.Component {
   static propTypes = {
