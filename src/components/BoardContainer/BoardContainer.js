@@ -60,7 +60,7 @@ class BoardContainer extends React.Component {
   };
 
   render() {
-    const { boards, formOpen } = this.state;
+    const { boards, formOpen, editBoard } = this.state;
     const { setSingleBoard } = this.props;
 
     // map over boards to create <Board /> components
@@ -69,8 +69,10 @@ class BoardContainer extends React.Component {
 
     return (
       <div>
-        <button className="btn btn-warning" onClick={() => { this.setState({ formOpen: !formOpen }); }}><i className="far fa-plus-square"></i></button>
-        {formOpen ? <BoardForm createBoard={this.createBoard}/> : ''}
+        <button className="btn btn-warning" onClick={() => { this.setState({ formOpen: !formOpen }); }}>
+          {formOpen ? <i class="far fa-window-close"></i> : <i className="far fa-plus-square"></i>}
+        </button>
+        {formOpen ? <BoardForm createBoard={this.createBoard} board={ editBoard } /> : ''}
         <div className="card-columns offset-3">
           { boardCard }
         </div>

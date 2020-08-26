@@ -12,11 +12,24 @@ import authData from '../../helpers/data/AuthData';
 class BoardForm extends React.Component {
   static propTypes = {
     createBoard: PropTypes.func.isRequired,
+    board: PropTypes.object.isRequired,
   }
 
   state ={
     name: '',
     description: '',
+    isEditing: false,
+  }
+
+  componentDidMount() {
+    const { board } = this.props;
+    if (board.name) {
+      this.setState({
+        name: board.name,
+        description: board.description,
+        isEditing: true,
+      });
+    }
   }
 
   changeNameEvent = (e) => {
@@ -45,6 +58,7 @@ class BoardForm extends React.Component {
   };
 
   render() {
+    const { name, description, isEditing } = this.state;
     return (
       <form className="col-6 offset-3">
         <div className="form-group">
@@ -54,6 +68,7 @@ class BoardForm extends React.Component {
             className="form-control"
             id="BoardName"
             placeholder="Enter Board Name"
+            value={name}
             onChange={this.changeNameEvent}
           />
         </div>
@@ -64,10 +79,15 @@ class BoardForm extends React.Component {
             className="form-control"
             id="boardDescription"
             placeholder="Enter Board Description"
+            value={description}
             onChange={this.changeDescriptionEvent}
           />
         </div>
-        <button type="submit" className="btn btn-primary" onClick={this.saveBoardEvent}>Save Board</button>
+        {
+          isEditing
+            ? <button className="btn btn-primary">Edit Board</button>
+            : <button type="submit" className="btn btn-primary" onClick={this.saveBoardEvent}>Save Board</button>
+        }
       </form>
     );
   }
