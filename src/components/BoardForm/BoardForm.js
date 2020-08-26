@@ -13,6 +13,7 @@ class BoardForm extends React.Component {
   static propTypes = {
     createBoard: PropTypes.func.isRequired,
     board: PropTypes.object.isRequired,
+    updateBoard: PropTypes.func.isRequired,
   }
 
   state ={
@@ -57,6 +58,20 @@ class BoardForm extends React.Component {
     createBoard(newBoard);
   };
 
+  editBoardEvent = (e) => {
+    e.preventDefault();
+    const { name, description } = this.state;
+    const { updateBoard, board } = this.props;
+
+    const myBoardWithChanges = {
+      name,
+      description,
+      uid: authData.getUid(),
+    };
+
+    updateBoard(board.id, myBoardWithChanges);
+  };
+
   render() {
     const { name, description, isEditing } = this.state;
     return (
@@ -85,7 +100,7 @@ class BoardForm extends React.Component {
         </div>
         {
           isEditing
-            ? <button className="btn btn-primary">Edit Board</button>
+            ? <button className="btn btn-primary" onClick={this.editBoardEvent}>Edit Board</button>
             : <button type="submit" className="btn btn-primary" onClick={this.saveBoardEvent}>Save Board</button>
         }
       </form>

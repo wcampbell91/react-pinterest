@@ -40,9 +40,9 @@ class Board extends React.Component {
             <button className="btn btn-primary" onClick={this.singleBoardEvent}><i className="ml-2 fas fa-search-plus"></i></button>
             <button className="btn btn-warning" onClick={this.editBoardEvent}><i className="far fa-edit"></i></button>
           </div>
-          <div className="card-footer">
+        </div>
+        <div className="card-footer">
             <button className="btn btn-danger" onClick={this.deleteBoardEvent}>Delete Board</button>
-          </div>
         </div>
       </div>
     );
