@@ -23,6 +23,7 @@ class BoardContainer extends React.Component {
   state = {
     boards: [],
     formOpen: false,
+    editBoard: {},
   }
 
   getBoards = () => {
@@ -53,19 +54,35 @@ class BoardContainer extends React.Component {
       .catch((err) => console.error('create Board broke!', err));
   };
 
+  editABoard = (boardToEdit) => {
+    console.error(boardToEdit);
+    this.setState({ formOpen: true, editBoard: boardToEdit });
+  };
+
+  updateBoard = (boardId, editedBoard) => {
+    boardData.updateBoard(boardId, editedBoard)
+      .then((res) => {
+        this.getBoards();
+        this.setState({ formOpen: false, editBoard: {} });
+      })
+      .catch((err) => console.error('update board broke :(', err));
+  };
+
   render() {
-    const { boards, formOpen } = this.state;
+    const { boards, formOpen, editBoard } = this.state;
     const { setSingleBoard } = this.props;
 
     // map over boards to create <Board /> components
 
-    const boardCard = boards.map((board) => <Board key={board.id} board={board} setSingleBoard={setSingleBoard} deleteBoard={this.deleteBoard}/>);
+    const boardCard = boards.map((board) => <Board key={board.id} board={board} setSingleBoard={setSingleBoard} deleteBoard={this.deleteBoard} editABoard={this.editABoard}/>);
 
     return (
       <div>
-        <button className="btn btn-warning" onClick={() => { this.setState({ formOpen: !formOpen }); }}><i className="far fa-plus-square"></i></button>
-        {formOpen ? <BoardForm createBoard={this.createBoard}/> : ''}
-        <div className="card-columns">
+        <button className="btn btn-warning" onClick={() => { this.setState({ formOpen: !formOpen }); }}>
+          {formOpen ? <i class="far fa-window-close"></i> : <i className="far fa-plus-square"></i>}
+        </button>
+        {formOpen ? <BoardForm createBoard={this.createBoard} board={ editBoard } updateBoard={ this.updateBoard }/> : ''}
+        <div className="card-columns offset-3">
           { boardCard }
         </div>
       </div>

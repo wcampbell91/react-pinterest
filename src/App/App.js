@@ -54,6 +54,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <MyNavbar authed={ authed } />
+        <h1>Pinterest<i className="ml-2 far fa-kiss-wink-heart"></i></h1>
         { loadComponent() }
       </div>
     );
