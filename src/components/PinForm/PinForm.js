@@ -8,12 +8,28 @@ class PinForm extends React.Component {
   static propTypes = {
     board: boardShape.boardShape,
     createPin: PropTypes.func.isRequired,
+    pinToEdit: PropTypes.object.isRequired,
+    updatePin: PropTypes.func.isRequired,
   }
 
   state = {
     title: '',
     link: '',
     imageUrl: '',
+    isEditing: false,
+  }
+
+  componentDidMount() {
+    const { pinToEdit } = this.props;
+    if (pinToEdit.title) {
+      this.setState({
+        boardId: pinToEdit.boardId,
+        title: pinToEdit.title,
+        link: pinToEdit.link,
+        imageUrl: pinToEdit.imageUrl,
+        isEditing: true,
+      });
+    }
   }
 
   changeTitleEvent = (e) => {
@@ -46,7 +62,34 @@ class PinForm extends React.Component {
     createPin(newPin);
   };
 
+  updatePinEvent = (e) => {
+    e.preventDefault();
+    const { updatePin, pinToEdit } = this.props;
+    const {
+      boardId,
+      title,
+      link,
+      imageUrl,
+    } = this.state;
+
+    const updatedPin = {
+      boardId,
+      title,
+      link,
+      imageUrl,
+      uid: authData.getUid(),
+    };
+
+    updatePin(pinToEdit.id, updatedPin);
+  };
+
   render() {
+    const {
+      title,
+      link,
+      imageUrl,
+      isEditing,
+    } = this.state;
     return (
       <form className="col-6 offset-3">
       <div className="form-group">
@@ -56,6 +99,7 @@ class PinForm extends React.Component {
           className="form-control"
           id="pinNTme"
           placeholder="Enter Pin Name"
+          value={title}
           onChange={this.changeTitleEvent}
         />
       </div>
@@ -66,6 +110,7 @@ class PinForm extends React.Component {
           className="form-control"
           id="pinLink"
           placeholder="Enter Pin Web Url"
+          value={link}
           onChange={this.changeLinkEvent}
         />
       </div>
@@ -76,10 +121,15 @@ class PinForm extends React.Component {
           className="form-control"
           id="imageUrl"
           placeholder="Enter Pin Image Url"
+          value={imageUrl}
           onChange={this.changeImageEvent}
         />
       </div>
-      <button type="submit" className="btn btn-primary mb-2" onClick={this.savePinEvent}>Save Board</button>
+      {
+          isEditing
+            ? <button className="btn btn-primary mb-2" onClick={this.updatePinEvent}>Edit Pin</button>
+            : <button type="submit" className="btn btn-primary mb-2" onClick={this.savePinEvent}>Save Pin</button>
+        }
     </form>
     );
   }

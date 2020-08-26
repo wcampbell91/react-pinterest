@@ -8,7 +8,7 @@ class Board extends React.Component {
     board: boardShape.boardShape,
     setSingleBoard: PropTypes.func.isRequired,
     deleteBoard: PropTypes.func.isRequired,
-    editBoardEvent: PropTypes.func.isRequired,
+    editABoard: PropTypes.func.isRequired,
   }
 
   singleBoardEvent = (e) => {
