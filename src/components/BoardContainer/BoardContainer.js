@@ -79,7 +79,7 @@ class BoardContainer extends React.Component {
     return (
       <div>
         <button className="btn btn-warning" onClick={() => { this.setState({ formOpen: !formOpen }); }}>
-          {formOpen ? <i class="far fa-window-close"></i> : <i className="far fa-plus-square"></i>}
+          {formOpen ? <i className="far fa-window-close"></i> : <i className="far fa-plus-square"></i>}
         </button>
         {formOpen ? <BoardForm createBoard={this.createBoard} board={ editBoard } updateBoard={ this.updateBoard }/> : ''}
         <div className="card-columns offset-3">
